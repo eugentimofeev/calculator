@@ -164,18 +164,22 @@ export default class App extends Component {
                 <Input
                   name="hours"
                   label="Кол. часов по графику"
-                  text="Можно использовать колесико мыши"
+                  text="Используйте колесико мыши"
                   value={this.state.hours}
-                  onInputChange={this.onValueChange}
+				  onInputChange={this.onValueChange}
+				  promptBtnPosition="right"
+				  promptText="1"
                 />
               </Grid>
               <Grid container justify="center" item xs={6}>
                 <Input
                   name="days"
                   label="Кол. смен по графику"
-                  text="Можно использовать колесико мыши"
+                  text="Используйте колесико мыши"
                   value={this.state.days}
-                  onInputChange={this.onValueChange}
+				  onInputChange={this.onValueChange}
+				  promptBtnPosition="left"
+				  promptText="2"
                 />
               </Grid>
             </Grid>
@@ -185,20 +189,24 @@ export default class App extends Component {
                 <Input
                   name="removedHours"
                   label="Убрать часы"
-                  text="Можно использовать колесико мыши"
+                  text="Используйте колесико мыши"
                   value={this.state.removedHours}
                   maxValue={180}
-                  onInputChange={this.onValueChange}
+				  onInputChange={this.onValueChange}
+				  promptBtnPosition="right"
+				  promptText="3"
                 />
               </Grid>
               <Grid container justify="center" item xs={6}>
                 <Input
                   name="addedHours"
-                  label="Добавить часы(доп. смены)"
-                  text="Можно использовать колесико мыши"
+                  label="Добавить часы"
+                  text="Используйте колесико мыши"
                   value={this.state.addedHours}
                   maxValue={180}
-                  onInputChange={this.onValueChange}
+				  onInputChange={this.onValueChange}
+				  promptBtnPosition="left"
+				  promptText="4"
                 />
               </Grid>
             </Grid>
@@ -214,7 +222,9 @@ export default class App extends Component {
                     Хорошие: 3000,
                     Лучшие: 8000
                   }}
-                  onSelectChange={this.onValueChange}
+				  onSelectChange={this.onValueChange}
+				  promptBtnPosition="right"
+				  promptText="5"
                 />
               </Grid>
               <Grid container justify="center" item xs={4}>
@@ -228,7 +238,9 @@ export default class App extends Component {
                     "Больше-равно 4.7": 0.1, //10%
                     "Больше-равно 4.9": 0.2 //20%
                   }}
-                  onSelectChange={this.onValueChange}
+				  onSelectChange={this.onValueChange}
+				  promptBtnPosition="right"
+				  promptText="6"
                 />
               </Grid>
               <Grid container justify="center" item xs={4}>
@@ -238,13 +250,15 @@ export default class App extends Component {
                   text="Новая рейтинговая система"
                   value={this.state.rank}
                   values={{
-                    // к премии за решение записей и оценку по звонкам
-                    "Специалист или ниже": 0, //+0%
-                    Опытный: 0.02, //+2%
-                    Эксперт: 0.05, //+5%
+					// к премии за решение записей и оценку по звонкам
+                    "Специалист": 0, //+0%
+                    "Опытный": 0.02, //+2%
+                    "Эксперт": 0.05, //+5%
                     "Лучший из лучших": 0.07 //+7%
                   }}
-                  onSelectChange={this.onValueChange}
+				  onSelectChange={this.onValueChange}
+				  promptBtnPosition="left"
+				  promptText="7"
                 />
               </Grid>
             </Grid>
@@ -254,7 +268,19 @@ export default class App extends Component {
                   name="exam"
                   label="Экзамен по сетям"
                   onCheckboxChange={this.onValueChange}
-                  value={this.state.exam}
+				  value={this.state.exam}
+				  promptBtnPosition="right"
+				  promptText="8"
+                />
+              </Grid>
+			  <Grid container justify="center" item xs={3}>
+                <Check
+                  name="night"
+                  label="Ночник"
+                  onCheckboxChange={this.onValueChange}
+				  value={this.state.night}
+				  promptBtnPosition="right"
+				  promptText="9"
                 />
               </Grid>
               <Grid container justify="center" item xs={3}>
@@ -262,7 +288,9 @@ export default class App extends Component {
                   name="base"
                   label="Работа с базой"
                   onCheckboxChange={this.onValueChange}
-                  value={this.state.base}
+				  value={this.state.base}
+				  promptBtnPosition="left"
+				  promptText="10"
                 />
               </Grid>
               <Grid container justify="center" item xs={3}>
@@ -270,15 +298,9 @@ export default class App extends Component {
                   name="newbies"
                   label="Помощь новичкам"
                   onCheckboxChange={this.onValueChange}
-                  value={this.state.newbies}
-                />
-              </Grid>
-              <Grid container justify="center" item xs={3}>
-                <Check
-                  name="night"
-                  label="Ночник"
-                  onCheckboxChange={this.onValueChange}
-                  value={this.state.night}
+				  value={this.state.newbies}
+				  promptBtnPosition="left"
+				  promptText="11"
                 />
               </Grid>
             </Grid>

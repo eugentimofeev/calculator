@@ -1,10 +1,10 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, {Component} from "react";
+import { withStyles } from "@material-ui/core/styles";
 import { Grid, Container } from "@material-ui/core";
 
 const mainColor = "#009189";
 
-const useStyles = makeStyles({
+const styles = {
   header: {
     width: "100%",
     height: "60px",
@@ -153,42 +153,55 @@ const useStyles = makeStyles({
     backgroundColor: "#ff9c46",
     transform: "rotate(-6deg)"
   }
-});
-
-const Header = () => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.header}>
-      <Container>
-        <Grid container spacing={0}>
-          <Grid container justify="flex-start" item xs={6}>
-            <div className={classes.logo}>
-              <div className={classes.sphere + " " + classes.sphere1} />
-              <div className={classes.rectangle + " " + classes.rectangle1} />
-              <div className={classes.sphere + " " + classes.sphere2} />
-              <div className={classes.rectangle + " " + classes.rectangle2} />
-              <div className={classes.sphere + " " + classes.sphere3} />
-              <div className={classes.rectangle + " " + classes.rectangle3} />
-              <div className={classes.rectangle + " " + classes.rectangle4} />
-              <div className={classes.rectangle + " " + classes.rectangle5} />
-              <div className={classes.sphere + " " + classes.sphere4} />
-              <div className={classes.sphere + " " + classes.sphere5} />
-              <div className={classes.sphere + " " + classes.sphere6} />
-              <div className={classes.rectangle + " " + classes.rectangle6} />
-              <div className={classes.sphere + " " + classes.sphere7} />
-            </div>
-            <div className={classes.title}>
-              Калькулятор ЗП для сотрудников СЗК
-            </div>
-          </Grid>
-          <Grid container justify="flex-end" item xs={6}>
-            <div className={classes.about}>О сайте</div>
-          </Grid>
-        </Grid>
-      </Container>
-    </div>
-  );
 };
 
-export default Header;
+class Header extends Component {
+
+  state = {hide: true}
+
+  handleChange = () => {
+    this.setState(state => ({
+        hide: !state.hide
+    }));
+}
+  render () {
+
+    const {classes} = this.props;
+
+    return (
+      <div className={classes.header}>
+        <Container>
+          <Grid container spacing={0}>
+            <Grid container justify="flex-start" item xs={6}>
+              <div className={classes.logo}>
+                <div className={classes.sphere + " " + classes.sphere1} />
+                <div className={classes.rectangle + " " + classes.rectangle1} />
+                <div className={classes.sphere + " " + classes.sphere2} />
+                <div className={classes.rectangle + " " + classes.rectangle2} />
+                <div className={classes.sphere + " " + classes.sphere3} />
+                <div className={classes.rectangle + " " + classes.rectangle3} />
+                <div className={classes.rectangle + " " + classes.rectangle4} />
+                <div className={classes.rectangle + " " + classes.rectangle5} />
+                <div className={classes.sphere + " " + classes.sphere4} />
+                <div className={classes.sphere + " " + classes.sphere5} />
+                <div className={classes.sphere + " " + classes.sphere6} />
+                <div className={classes.rectangle + " " + classes.rectangle6} />
+                <div className={classes.sphere + " " + classes.sphere7} />
+              </div>
+              <div className={classes.title}>
+                Калькулятор ЗП для сотрудников СЗК
+              </div>
+            </Grid>
+            <Grid container justify="flex-end" item xs={6}>
+              <div className={classes.about}
+                onClick={this.handleChange}
+              >О сайте</div>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+    );
+  }
+};
+
+export default withStyles(styles)(Header);

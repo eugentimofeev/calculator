@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormControlLabel, Checkbox } from "@material-ui/core/";
+import Prompt from "../prompt/prompt"
 
 export default class Check extends Component {
   valueChange = e => {
@@ -7,16 +8,23 @@ export default class Check extends Component {
   };
 
   render() {
-    const { label, value, name } = this.props;
+    const { label, value, name, promptBtnPosition = false, promptText = "" } = this.props;
+
+    const promptBtnLeft = promptBtnPosition === "left" ? <Prompt promptText={promptText} position="leftCheck"/> : null;
+    const promptBtnRight = promptBtnPosition === "right" ? <Prompt promptText={promptText} position="rightCheck"/> : null;
 
     return (
-      <FormControlLabel
-        value={label}
-        control={<Checkbox color="secondary" checked={value} name={name} />}
-        label={label}
-        labelPlacement="top"
-        onChange={this.valueChange}
-      />
+      <>
+        {promptBtnLeft}
+        <FormControlLabel
+          value={label}
+          control={<Checkbox color="secondary" checked={value} name={name}/>}
+          label={label}
+          labelPlacement="top"
+          onChange={this.valueChange}
+        />
+        {promptBtnRight}
+      </>
     );
   }
 }

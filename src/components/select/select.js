@@ -6,6 +6,8 @@ import {
   FormHelperText,
   MenuItem
 } from "@material-ui/core/";
+import Prompt from "../prompt/prompt"
+
 
 import "./select.css";
 
@@ -28,25 +30,32 @@ export default class Choises extends Component {
   };
 
   render() {
-    const { label = "none", text = "", value, values, name } = this.props;
+    const { label = "none", text = "", value, values, name,  promptBtnPosition = false, promptText = ""  } = this.props;
+
+    const promptBtnLeft = promptBtnPosition === "left" ? <Prompt promptText={promptText} position="left"/> : null;
+    const promptBtnRight = promptBtnPosition === "right" ? <Prompt promptText={promptText} position="right"/> : null;
 
     const menuItems = this.renderItems(values);
 
     return (
-      <FormControl>
-        <InputLabel color="secondary" htmlFor="age-native-helper">
-          {label}
-        </InputLabel>
-        <Select
-          color="secondary"
-          value={value}
-          onChange={this.valueChange}
-          name={name}
-        >
-          {menuItems}
-        </Select>
-        <FormHelperText>{text}</FormHelperText>
-      </FormControl>
+      <>
+        {promptBtnLeft}
+        <FormControl>
+          <InputLabel color="secondary" htmlFor="age-native-helper">
+            {label}
+          </InputLabel>
+          <Select
+            color="secondary"
+            value={value}
+            onChange={this.valueChange}
+            name={name}
+          >
+            {menuItems}
+          </Select>
+          <FormHelperText>{text}</FormHelperText>
+        </FormControl>
+        {promptBtnRight}
+      </>
     );
   }
 }

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { TextField } from "@material-ui/core/";
+import Prompt from "../prompt/prompt"
+
 
 export default class Input extends Component {
   handleWheel = (e, maxValue) => {
@@ -30,20 +32,28 @@ export default class Input extends Component {
   };
 
   render() {
-    const { label, text, value = "", name, maxValue = 31 } = this.props;
+    const { label, text, value = "", name, maxValue = 31, promptBtnPosition = false, promptText = "" } = this.props;
+
+    const promptBtnLeft = promptBtnPosition === "left" ? <Prompt promptText={promptText} position="left"/> : null;
+    const promptBtnRight = promptBtnPosition === "right" ? <Prompt promptText={promptText} position="right"/> : null;
+
 
     return (
-      <TextField
-        color="secondary"
-        name={name}
-        value={value}
-        label={label}
-        helperText={text}
-        onChange={e => this.handleChange(e, maxValue)}
-        onWheel={e => this.handleWheel(e, maxValue)}
-        onMouseEnter={this.handleEnter}
-        onMouseLeave={this.handleLeave}
-      />
+      <>
+        {promptBtnLeft}
+        <TextField
+          color="secondary"
+          name={name}
+          value={value}
+          label={label}
+          helperText={text}
+          onChange={e => this.handleChange(e, maxValue)}
+          onWheel={e => this.handleWheel(e, maxValue)}
+          onMouseEnter={this.handleEnter}
+          onMouseLeave={this.handleLeave}
+        />
+        {promptBtnRight}
+      </>
     );
   }
 }
