@@ -10,8 +10,8 @@ export default class Check extends Component {
   render() {
     const { label, value, name, promptBtnPosition = false, promptText = "" } = this.props;
 
-    const promptBtnLeft = promptBtnPosition === "left" ? <Prompt promptText={promptText} position="leftCheck"/> : null;
-    const promptBtnRight = promptBtnPosition === "right" ? <Prompt promptText={promptText} position="rightCheck"/> : null;
+    const promptBtnLeft = promptBtnPosition === "left" ? <Prompt promptText={promptText} position="top"/> : null;
+    const promptBtnRight = promptBtnPosition === "right" ? <Prompt promptText={promptText} position="top"/> : null;
 
     return (
       <>

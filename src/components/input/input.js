@@ -4,6 +4,7 @@ import Prompt from "../prompt/prompt"
 
 
 export default class Input extends Component {
+
   handleWheel = (e, maxValue) => {
     let value = +e.target.value;
 
@@ -36,7 +37,6 @@ export default class Input extends Component {
 
     const promptBtnLeft = promptBtnPosition === "left" ? <Prompt promptText={promptText} position="left"/> : null;
     const promptBtnRight = promptBtnPosition === "right" ? <Prompt promptText={promptText} position="right"/> : null;
-
 
     return (
       <>
