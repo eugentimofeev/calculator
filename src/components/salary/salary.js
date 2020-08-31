@@ -6,7 +6,6 @@ import AnimatedNumber from "animated-number-react";
 const styles = {
 	toUpperCase: {
 		textTransform: "uppercase",
-		fontFamily: "Roboto"
 	},
 	salaryTitle: {
 		fontSize: 20,

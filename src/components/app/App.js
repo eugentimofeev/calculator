@@ -189,7 +189,7 @@ class App extends Component {
 												должны отработать за смену. Общее кол. часов вычисляется путем перемножения
 												количества смен на часы по графику. Общая сумма за часы - общ. кол. часов
 												умножается на ставку."
-											link="https://karelia.pro/work/corpnews/?module=sector7"
+											link="https://karelia.pro/work/corpnews/?news_id=2070"
 										/>
 									</Grid>
 									<Grid
@@ -206,7 +206,7 @@ class App extends Component {
 													должны отработать. Общее кол. часов вычисляется путем перемножения
 													смен на часы по графику. Общая сумма за часы - общ. кол. часов
 													умножается на ставку."
-												link="https://karelia.pro/work/corpnews/?module=sector7"
+												link="https://karelia.pro/work/corpnews/?news_id=2070"
 											/>
 										<Input
 											name="days"
@@ -237,7 +237,7 @@ class App extends Component {
 												text="Если у Вас были отгулы, или Вы закончили смену 
 													раньше графика, то используйте данный пункт,
 													чтобы убрать часы."
-												link="https://karelia.pro/work/corpnews/?module=sector7"
+												link="https://karelia.pro/work/corpnews/?news_id=2070"
 											/>
 									</Grid>
 									<Grid
@@ -252,7 +252,7 @@ class App extends Component {
 											text="Если у Вас есть доп. смены, или Вы задержались на смене
 												, то добавьте часы в данном поле, чтобы увеличить ЗП! Если Вы отработали
 												все часы по графику, то все доп. часы будут идти по ставке x1.5!"
-											link="https://karelia.pro/work/corpnews/?module=sector7"
+											link="https://karelia.pro/work/corpnews/?news_id=2070"
 										/>
 										<Input
 											name="addedHours"
@@ -288,7 +288,7 @@ class App extends Component {
 											text="Доп. премия за качество работы за месяц. Если Вы попали в лучших, то
 												получите 8000р. к ЗП! Хорошие - 3000р. Остальные - без премии. Следите за 
 												своей оценкой, не получайте минусов в рейтинг для достижения лучшего результата."
-											link="https://karelia.pro/work/corpnews/?module=sector7"	
+											link="https://karelia.pro/work/corpnews/?news_id=2070"	
 										/>
 									</Grid>
 									<Grid
@@ -316,7 +316,7 @@ class App extends Component {
 											text="Ваша оценка за звонки влияет на процент, который Вы получите к ЗП
 												от общей суммы за часы. Если оценка Больше-равна 4.9 - плюс 20%. Больше-равна 4.7
 												- 10%. Меньше 4.7 - без премии за оценку."
-											link="https://karelia.pro/work/corpnews/?module=sector7"
+											link="https://karelia.pro/work/corpnews/?news_id=2070"
 										/>
 									</Grid>
 									<Grid
@@ -361,7 +361,7 @@ class App extends Component {
 											text="Выполнение нормы решения записей дает Вам бонус к ЗП в размере
 												10% от сумму за часы. Инженеру необходимо решать минимум 2 записи в час.
 												Решайте больше записей - помогайте дежурному!"
-											link="https://karelia.pro/work/corpnews/?module=sector7"
+											link="https://karelia.pro/work/corpnews/?news_id=2070"
 										/>
 									</Grid>
 									<Grid container justify="center" item sm={6} md={4}>
@@ -375,14 +375,14 @@ class App extends Component {
 											text="У ночника ставка за часы больше. Это сделано для того, чтобы 
 												скомпенсировать разницу между  работой ночью и днем. Ставка без экзамена
 												по сетям - 110 рублей в час. С экзаменом - 125 рублей."
-											link="https://karelia.pro/work/corpnews/?module=sector7"	
+											link="https://karelia.pro/work/corpnews/?news_id=2070"	
 										/>
 									</Grid>
 									<Grid container justify="center" item sm={12} md={4}>
 									  	<Prompt
 											text="Если Вы опытный инженер, то, возможно, Вы удостоились чести обучать 
 												новичка. За обучение и помощь новичка полагается премия - 5% от суммы за часы!"
-											link="https://karelia.pro/work/corpnews/?module=sector7"
+											link="https://karelia.pro/work/corpnews/?news_id=2070"
 										/>
 										<Check
 											name="newbies"

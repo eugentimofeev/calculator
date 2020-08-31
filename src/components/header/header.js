@@ -278,6 +278,11 @@ class Header extends Component {
 				>
 					<Zoom in={this.state.showAbout} timeout={500}>
 						<span>
+							Обновление от 31.08.20
+						</span>
+					</Zoom>
+					<Zoom in={this.state.showAbout} timeout={500}>
+						<span>
 							Сайт создан специально для сотрудников СЗК, дабы облегчить
 							расчет ЗП. Также благодаря данному калькулятору можно
 							ставить планы на месяц и улучшать свои показатели на работе.
