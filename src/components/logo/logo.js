@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-const mainColor = "#009189";
+const mainColor = "#0b949c";
 
 const useStyles = makeStyles({
 	logo: {

@@ -3,6 +3,7 @@ import { Grid, Container, Tabs, Tab, Fade } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
+import Prompt from "../prompt/prompt";
 
 import Header from "../header/header";
 import Choises from "../select/select";
@@ -23,7 +24,7 @@ const styles = {
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: "#009189"
+			main: "#0b949c" 
 		},
 		secondary: {
 			main: "#00C35A"
@@ -44,7 +45,6 @@ const initialState = {
 	removedHours: "",
 	addedHours: "",
 
-	exam: false,
 	base: false,
 	newbies: false,
 	night: false,
@@ -76,25 +76,19 @@ class App extends Component {
 	calcSalary() {
 		let rate;
 
-		if (this.state.night) {
-			if (this.state.exam) rate = 125;
-			else rate = 110;
-		} else {
-			if (this.state.exam) rate = 103;
-			else rate = 95;
-		}
+		this.state.night ? rate = 125 : rate = 103;
 
 		let base = rate * (this.calcTrueHours() - this.calcAdditionalHours());
 
 		base +=
-		+this.state.rating +
-		this.calcAdditionalHours() * 1.5 * rate +
-		base * (this.state.assessment + +this.state.rank) +
-		base * ((this.state.base ? 0.1 : 0) + +this.state.rank) +
-		base * (this.state.newbies ? 0.05 : 0) +
-		this.calcSales();
+			+this.state.rating +
+			this.calcAdditionalHours() * 1.5 * rate +
+			base * (this.state.assessment + +this.state.rank) +
+			base * ((this.state.base ? 0.1 : 0) + +this.state.rank) +
+			base * (this.state.newbies ? 0.05 : 0) +
+			this.calcSales();
 
-		return Math.round(base * 100) / 100 + " РУБ";
+		return base;
 	}
 
 	calcGraphHours() {
@@ -103,7 +97,7 @@ class App extends Component {
 
 	calcTrueHours() {
 		return (
-			this.calcGraphHours() - this.state.removedHours + this.state.addedHours
+			this.calcGraphHours() - this.state.removedHours + +this.state.addedHours
 		);
 	}
 
@@ -188,8 +182,9 @@ class App extends Component {
 											value={this.state.hours}
 											onInputChange={this.onValueChange}
 											maxValue={24}
-											promptBtnPosition="right"
-											promptText="У каждого инженера есть определенное кол. часов в смену, 
+										/>
+										<Prompt
+											text="У каждого инженера есть определенное кол. часов в смену, 
 												которые указаны в графике. Это то кол. часов, которые Вы 
 												должны отработать за смену. Общее кол. часов вычисляется путем перемножения
 												количества смен на часы по графику. Общая сумма за часы - общ. кол. часов
@@ -205,6 +200,14 @@ class App extends Component {
 										xs={12}
 										sm={6}
 									>
+											<Prompt
+												text="У каждого инженера есть определенной кол. смен, 
+													которые указаны в графике. Это то кол. смен, которые Вы 
+													должны отработать. Общее кол. часов вычисляется путем перемножения
+													смен на часы по графику. Общая сумма за часы - общ. кол. часов
+													умножается на ставку."
+												link="https://karelia.pro/work/corpnews/?module=sector7"
+											/>
 										<Input
 											name="days"
 											label="Кол. смен по графику"
@@ -212,13 +215,6 @@ class App extends Component {
 											value={this.state.days}
 											onInputChange={this.onValueChange}
 											maxValue={31}
-											promptBtnPosition="left"
-											promptText="У каждого инженера есть определенной кол. смен, 
-												которые указаны в графике. Это то кол. смен, которые Вы 
-												должны отработать. Общее кол. часов вычисляется путем перемножения
-												смен на часы по графику. Общая сумма за часы - общ. кол. часов
-												умножается на ставку."
-											link="https://karelia.pro/work/corpnews/?module=sector7"
 										/>
 									</Grid>
 									<Grid
@@ -236,12 +232,13 @@ class App extends Component {
 											value={this.state.removedHours}
 											maxValue={180}
 											onInputChange={this.onValueChange}
-											promptBtnPosition="right"
-											promptText="Если у Вас были отгулы, или Вы закончили смену 
-												раньше графика, то используйте данный пункт,
-												чтобы убрать часы."
-											link="https://karelia.pro/work/corpnews/?module=sector7"
 										/>
+											<Prompt
+												text="Если у Вас были отгулы, или Вы закончили смену 
+													раньше графика, то используйте данный пункт,
+													чтобы убрать часы."
+												link="https://karelia.pro/work/corpnews/?module=sector7"
+											/>
 									</Grid>
 									<Grid
 										className={classes.marginB}
@@ -251,6 +248,12 @@ class App extends Component {
 										xs={12}
 										sm={6}
 									>
+										<Prompt
+											text="Если у Вас есть доп. смены, или Вы задержались на смене
+												, то добавьте часы в данном поле, чтобы увеличить ЗП! Если Вы отработали
+												все часы по графику, то все доп. часы будут идти по ставке x1.5!"
+											link="https://karelia.pro/work/corpnews/?module=sector7"
+										/>
 										<Input
 											name="addedHours"
 											label="Добавить часы"
@@ -258,11 +261,6 @@ class App extends Component {
 											value={this.state.addedHours}
 											maxValue={180}
 											onInputChange={this.onValueChange}
-											promptBtnPosition="left"
-											promptText="Если у Вас есть доп. смены, или Вы задержались на смене
-												, то добавьте часы в данном поле, чтобы увеличить ЗП! Если Вы отработали
-												все часы по графику, то все доп. часы будут идти по ставке x1.5!"
-											link="https://karelia.pro/work/corpnews/?module=sector7"
 										/>
 									</Grid>
 									<Grid
@@ -285,11 +283,12 @@ class App extends Component {
 												Лучшие: 8000
 											}}
 											onSelectChange={this.onValueChange}
-											promptBtnPosition="right"
-											promptText="Доп. премия за качество работы за месяц. Если Вы попали в лучших, то
+										/>
+										<Prompt
+											text="Доп. премия за качество работы за месяц. Если Вы попали в лучших, то
 												получите 8000р. к ЗП! Хорошие - 3000р. Остальные - без премии. Следите за 
 												своей оценкой, не получайте минусов в рейтинг для достижения лучшего результата."
-											link="https://karelia.pro/work/corpnews/?module=sector7"
+											link="https://karelia.pro/work/corpnews/?module=sector7"	
 										/>
 									</Grid>
 									<Grid
@@ -312,8 +311,9 @@ class App extends Component {
 												"Больше-равно 4.9": 0.2
 											}}
 											onSelectChange={this.onValueChange}
-											promptBtnPosition="right"
-											promptText="Ваша оценка за звонки влияет на процент, который Вы получите к ЗП
+										/>
+										<Prompt
+											text="Ваша оценка за звонки влияет на процент, который Вы получите к ЗП
 												от общей суммы за часы. Если оценка Больше-равна 4.9 - плюс 20%. Больше-равна 4.7
 												- 10%. Меньше 4.7 - без премии за оценку."
 											link="https://karelia.pro/work/corpnews/?module=sector7"
@@ -327,6 +327,14 @@ class App extends Component {
 										xs={12}
 										md={4}
 									>
+										<Prompt
+											text="Рейтинговая система влияет на процент, который Вы получаете за 
+												работу с базой и оценку за звонки. Лучший из лучших - плюс 7% к бонусам. 
+												Эксперт - 5%.. Опытный - 2%. Специались и ниже - 
+												без доп. бонуса. К примеру, специалист получает 20% за звонки, если его
+												оценка выше 4.9, а эксперт получит 25% за туже оценку."
+											link="https://karelia.pro/work/wiki/%D0%A0%D0%B5%D0%B9%D1%82%D0%B8%D0%BD%D0%B3_%D0%B8_%D0%B4%D0%BE%D1%81%D1%82%D0%B8%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F"											
+										/>
 										<Choises
 											name="rank"
 											label="Ранг"
@@ -340,64 +348,47 @@ class App extends Component {
 												"Лучший из лучших": 0.07
 											}}
 											onSelectChange={this.onValueChange}
-											promptBtnPosition="left"
-											promptText="Рейтинговая система влияет на процент, который Вы получаете за 
-												работу с базой и оценку за звонки. Лучший из лучших - плюс 7% к бонусам. 
-												Эксперт - 5%.. Опытный - 2%. Специались и ниже - 
-												без доп. бонуса. К примеру, специалист получает 20% за звонки, если его
-												оценка выше 4.9, а эксперт получит 25% за туже оценку."
-											link="https://karelia.pro/work/wiki/%D0%A0%D0%B5%D0%B9%D1%82%D0%B8%D0%BD%D0%B3_%D0%B8_%D0%B4%D0%BE%D1%81%D1%82%D0%B8%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F"
 										/>
 									</Grid>
-									<Grid container justify="center" item sm={6} md={3}>
-										<Check
-											name="exam"
-											label="Экзамен по сетям"
-											onCheckboxChange={this.onValueChange}
-											value={this.state.exam}
-											promptBtnPosition="right"
-											promptText="Экзамен влияет на Вашу ставку за часы. Если экзамен сдан,
-												то ставка 103 рубля в час. Если не сдан, то 97 рублей. Новичкам лучше
-												быстрее всего сдавать экзамен, дабы повысить свой скилл и ЗП!"
-											link="https://karelia.pro/work/wiki/%D0%AD%D0%BA%D0%B7%D0%B0%D0%BC%D0%B5%D0%BD_%D0%BF%D0%BE_%D1%81%D0%B5%D1%82%D1%8F%D0%BC_%D0%B4%D0%BB%D1%8F_%D0%A1%D0%97%D0%9A"
-										/>
-									</Grid>
-									<Grid container justify="center" item sm={6} md={3}>
-										<Check
-											name="night"
-											label="Ночник"
-											onCheckboxChange={this.onValueChange}
-											value={this.state.night}
-											promptBtnPosition="right"
-											promptText="У ночника ставка за часы больше. Это сделано для того, чтобы 
-												скомпенсировать разницу между  работой ночью и днем. Ставка без экзамена
-												по сетям - 110 рублей в час. С экзаменом - 125 рублей."
-											link="https://karelia.pro/work/corpnews/?module=sector7"
-										/>
-									</Grid>
-									<Grid container justify="center" item sm={6} md={3}>
+									<Grid container justify="center" item sm={6} md={4}>
 										<Check
 											name="base"
 											label="Работа с базой"
 											onCheckboxChange={this.onValueChange}
 											value={this.state.base}
-											promptBtnPosition="left"
-											promptText="Выполнение нормы решения записей дает Вам бонус к ЗП в размере
+										/>
+										<Prompt
+											text="Выполнение нормы решения записей дает Вам бонус к ЗП в размере
 												10% от сумму за часы. Инженеру необходимо решать минимум 2 записи в час.
 												Решайте больше записей - помогайте дежурному!"
 											link="https://karelia.pro/work/corpnews/?module=sector7"
 										/>
 									</Grid>
-									<Grid container justify="center" item sm={6} md={3}>
+									<Grid container justify="center" item sm={6} md={4}>
+										<Check
+											name="night"
+											label="Ночник"
+											onCheckboxChange={this.onValueChange}
+											value={this.state.night}
+										/>
+										<Prompt
+											text="У ночника ставка за часы больше. Это сделано для того, чтобы 
+												скомпенсировать разницу между  работой ночью и днем. Ставка без экзамена
+												по сетям - 110 рублей в час. С экзаменом - 125 рублей."
+											link="https://karelia.pro/work/corpnews/?module=sector7"	
+										/>
+									</Grid>
+									<Grid container justify="center" item sm={12} md={4}>
+									  	<Prompt
+											text="Если Вы опытный инженер, то, возможно, Вы удостоились чести обучать 
+												новичка. За обучение и помощь новичка полагается премия - 5% от суммы за часы!"
+											link="https://karelia.pro/work/corpnews/?module=sector7"
+										/>
 										<Check
 											name="newbies"
 											label="Помощь новичкам"
 											onCheckboxChange={this.onValueChange}
 											value={this.state.newbies}
-											promptBtnPosition="left"
-											promptText="Если Вы опытный инженер, то, возможно, Вы удостоились чести обучать 
-												новичка. За обучение и помощь новичка полагается премия - 5% от суммы за часы!"
-											link="https://karelia.pro/work/corpnews/?module=sector7"
 										/>
 									</Grid>
 								</Grid>
@@ -527,27 +518,29 @@ class App extends Component {
 											label="Норма для удвоения"
 											onCheckboxChange={this.onValueChange}
 											value={this.state.salesDouble}
-											promptBtnPosition={
-												document.body.clientWidth < 576 ? "left" : "right"
-											}
-											promptText="На каждый месяц есть норма по продажам и норма для 
+											disabled={this.state.salesFine ? true : false}
+										/>
+										<Prompt
+											text="На каждый месяц есть норма по продажам и норма для 
 												удвоения. Если Вы выполнили норму продаж для удвоения, 
 												то сумма за все ваши продажи удваивается!"
 											link="https://karelia.pro/work/wiki/%D0%90%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B5_%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6%D0%B8_%D0%A1%D0%97%D0%9A"
-											disabled={this.state.salesFine ? true : false}
+									
 										/>
 									</Grid>
 									<Grid container justify="center" item xs={12} sm={6}>
+										<Prompt
+											text="На каждый месяц есть норма по продажам и норма для 
+												удвоения. Если Вы не выполнили норму, то получаете штраф в 
+												1000р к ЗП."
+											link="https://karelia.pro/work/wiki/%D0%90%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B5_%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6%D0%B8_%D0%A1%D0%97%D0%9A"
+									
+										/>
 										<Check
 											name="salesFine"
 											label="Инд. штраф 1000р"
 											onCheckboxChange={this.onValueChange}
 											value={this.state.salesFine}
-											promptBtnPosition="left"
-											promptText="На каждый месяц есть норма по продажам и норма для 
-												удвоения. Если Вы не выполнили норму, то получаете штраф в 
-												1000р к ЗП."
-											link="https://karelia.pro/work/wiki/%D0%90%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B5_%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6%D0%B8_%D0%A1%D0%97%D0%9A"
 											disabled={this.state.salesDouble ? true : false}
 										/>
 									</Grid>

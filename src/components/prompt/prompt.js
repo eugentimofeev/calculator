@@ -3,15 +3,13 @@ import { Button, Popover } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
-	promptBtnLeft: {
-		order: 0
-	},
-	promptBtnRight: {
-		order: 2
+	wrapp: {
+		display: 'flex',
+		alignItems: 'center',
 	},
 	"@media (max-width: 599px)": {
-		promptBtnRight: {
-		order: 0
+		wrapp: {
+			order: -1
 		},
 	},
 	btn: {
@@ -32,7 +30,7 @@ const styles = {
 };
 
 class Prompt extends Component {
-  	state = { anchorEl: null };
+	state = { anchorEl: null };
 
 	handleClick = event => {
 		this.setState({ anchorEl: event.currentTarget });
@@ -43,49 +41,47 @@ class Prompt extends Component {
 	};
 
 	render() {
-		const { classes, promptText, position, link } = this.props;
+		const { classes, text, link } = this.props;
 		const open = Boolean(this.state.anchorEl);
 		const id = open ? "simple-popover" : undefined;
 	
 		return (
-			<div
-				className={position === "left" ? classes.promptBtnLeft : classes.promptBtnRight} 
+		<div className={classes.wrapp}>
+			<Button
+				aria-describedby={id}
+				className={classes.btn}
+				variant="outlined"
+				color="primary"
+				onClick={this.handleClick}
 			>
-				<Button
-					aria-describedby={id}
-					className={classes.btn}
-					variant="outlined"
-					color="primary"
-					onClick={this.handleClick}
-				>
-					?
-				</Button>
-				<Popover
-					id={id}
-					open={open}
-					anchorEl={this.state.anchorEl}
-					onClose={this.handleClose}
-					anchorOrigin={{
-						vertical: "top",
-						horizontal: "center"
-					}}
-					transformOrigin={{
-						vertical: "bottom",
-						horizontal: "center",
-					}}
-				>
-					<div className={classes.prompt}>
-						{promptText}
+				?
+			</Button>
+			<Popover
+				id={id}
+				open={open}
+				anchorEl={this.state.anchorEl}
+				onClose={this.handleClose}
+				anchorOrigin={{
+					vertical: "top",
+					horizontal: "center"
+				}}
+				transformOrigin={{
+					vertical: "bottom",
+					horizontal: "center",
+				}}
+			>
+			<div className={classes.prompt}>
+				{text}
 
-						{link ? (
-						<a href={link} target="_blank" rel="noreferrer noopener">
-							{" "}
-							Доп. информация
-						</a>
-						) : null}
-					</div>
-				</Popover>
+				{link ? (
+				<a href={link} target="_blank" rel="noreferrer noopener">
+				{" "}
+					Доп. информация
+				</a>
+				) : null}
 			</div>
+			</Popover>
+		</div>
 		);
 	}
 }

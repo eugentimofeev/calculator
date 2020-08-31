@@ -7,7 +7,7 @@ import { ReactComponent as Vk } from "../svg/vk.svg";
 import { ReactComponent as Telegram } from "../svg/telegram.svg";
 import { ReactComponent as Youtube } from "../svg/youtube.svg";
 
-const mainColor = "#009189";
+const mainColor = "#0b949c";
 
 const styles = {
 	header: {

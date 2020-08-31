@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { TextField } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
-import Prompt from "../prompt/prompt";
 
 const styles = {
 	fixWidht: {
@@ -10,6 +9,12 @@ const styles = {
 	promptBtnWrapp: {
 		display: "flex",
 		alignItems: "center"
+	},
+	btn: {
+		height: "25px",
+		minWidth: "25px",
+		padding: "0",
+		margin: "0 10px 0 10px"
 	}
 };
 
@@ -18,7 +23,7 @@ class Input extends Component {
 
 		if (document.activeElement !== e.target) return;
 
-		let value = +e.target.value;
+		let value = e.target.value;
 
 		if (e.deltaY > 0) value--;
 		else value++;
@@ -29,7 +34,7 @@ class Input extends Component {
 	};
 
 	handleChange = (e, maxValue) => {
-		const value = +e.target.value;
+		const value = e.target.value;
 
 		if (value < 0 || value > maxValue || isNaN(value)) return;
 
@@ -68,33 +73,25 @@ class Input extends Component {
 			value = "",
 			name,
 			maxValue = 200,
-			promptBtnPosition = false,
-			promptText = "",
-			link = false 
 		} = this.props;
 
 		return (
-			<div className={classes.promptBtnWrapp}>
-				{promptBtnPosition && 
-				<Prompt 
-					promptText={promptText} 
-					link={link} 
-					position={promptBtnPosition} 
-				/>
-				}
-				<TextField
-					className={classes.fixWidht}
-					color="secondary"
-					name={name}
-					value={value}
-					label={label}
-					helperText={text}
-					onChange={e => this.handleChange(e, maxValue)}
-					onWheel={e => this.handleWheel(e, maxValue)}
-					onFocus={this.bodyBlock}
-					onBlur={this.bodyUnBlock}
-				/>
-			</div>
+			<TextField
+				type={window.innerWidth < 500 ? "number" : "text"}
+				className={classes.fixWidht}
+				color="secondary"
+				name={name}
+				value={value}
+				label={label}
+				helperText={text}
+				onChange={e => this.handleChange(e, maxValue)}
+				onWheel={e => this.handleWheel(e, maxValue)}
+				onFocus={window.innerWidth < 500 ? null : this.bodyBlock}
+				onBlur={this.bodyUnBlock}
+				onKeyUp={e => {
+					if (e.keyCode === 13) e.target.blur();
+				}}
+			/>
 		);
 	}
 }
