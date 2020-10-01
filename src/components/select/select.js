@@ -28,7 +28,12 @@ class Choises extends Component {
 		return arr;
 	}
 
-	valueChange = e => {
+	valueChange = (e,  someEvent) => {
+
+		const value = e.target.value;
+		console.log(value);
+		if (someEvent) someEvent(value);
+
 		this.props.onSelectChange(e.target.value, e.target.name);
 	};
 
@@ -40,6 +45,7 @@ class Choises extends Component {
 			value,
 			values,
 			name,
+			someEvent,
 		} = this.props;
 
 		const menuItems = this.renderItems(values);
@@ -52,7 +58,7 @@ class Choises extends Component {
 				<Select
 					color="secondary"
 					value={value}
-					onChange={this.valueChange}
+					onChange={e => this.valueChange(e, someEvent)}
 					name={name}
 				>	
 					{menuItems}

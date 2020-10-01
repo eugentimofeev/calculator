@@ -19,7 +19,7 @@ const styles = {
 };
 
 class Input extends Component {
-	handleWheel = (e, maxValue) => {
+	handleWheel = (e, maxValue, someEvent) => {
 
 		if (document.activeElement !== e.target) return;
 
@@ -30,15 +30,22 @@ class Input extends Component {
 
 		if (value < 0 || value > maxValue || isNaN(value)) return;
 
+
+		if (someEvent) someEvent(value);
+
 		this.props.onInputChange(value, e.target.name);
 	};
 
-	handleChange = (e, maxValue) => {
-		const value = e.target.value;
+	handleChange = (e, maxValue, someEvent) => {
+		let value = e.target.value;
 
 		if (value < 0 || value > maxValue || isNaN(value)) return;
 
+		
+		if (someEvent) someEvent(value);
+
 		this.props.onInputChange(value, e.target.name);
+
 	};
 
 	bodyBlock = () => {
@@ -73,6 +80,7 @@ class Input extends Component {
 			value = "",
 			name,
 			maxValue = 200,
+			someEvent,
 		} = this.props;
 
 		return (
@@ -84,8 +92,8 @@ class Input extends Component {
 				value={value}
 				label={label}
 				helperText={text}
-				onChange={e => this.handleChange(e, maxValue)}
-				onWheel={e => this.handleWheel(e, maxValue)}
+				onChange={e => this.handleChange(e, maxValue, someEvent)}
+				onWheel={e => this.handleWheel(e, maxValue, someEvent)}
 				onFocus={window.innerWidth < 500 ? null : this.bodyBlock}
 				onBlur={this.bodyUnBlock}
 				onKeyUp={e => {

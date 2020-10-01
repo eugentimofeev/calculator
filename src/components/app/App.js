@@ -18,7 +18,7 @@ const styles = {
 	},
   	marginB: {
 		marginBottom: 20
- 	}
+	},
 };
 
 const theme = createMuiTheme({
@@ -59,7 +59,8 @@ const initialState = {
 	autopayments: "",
 
 	salesDouble: false,
-	salesFine: false
+	salesFine: false,
+
 };
 
 class App extends Component {
@@ -76,7 +77,7 @@ class App extends Component {
 	calcSalary() {
 		let rate;
 
-		this.state.night ? rate = 125 : rate = 103;
+		this.state.night ? rate = 140 : rate = 123;
 
 		let base = rate * (this.calcTrueHours() - this.calcAdditionalHours());
 
@@ -123,6 +124,7 @@ class App extends Component {
 		} else {
 			if (this.state.salesFine) sales -= 1000;
 		}
+		
 
 		return sales;
 	}
@@ -134,6 +136,12 @@ class App extends Component {
 
 		this.setState({ activeTab: activeTab });
 	};
+
+	callTo = (value) => {
+		if (+value === 555777) {
+			window.open('tel:88142555777');	
+		}	
+	}
 
 	render() {
 		const { classes } = this.props;
@@ -373,8 +381,7 @@ class App extends Component {
 										/>
 										<Prompt
 											text="У ночника ставка за часы больше. Это сделано для того, чтобы 
-												скомпенсировать разницу между  работой ночью и днем. Ставка без экзамена
-												по сетям - 110 рублей в час. С экзаменом - 125 рублей."
+												скомпенсировать разницу между  работой ночью и днем. Ставка равняется 140 рублей в час."
 											link="https://karelia.pro/work/corpnews/?news_id=2070"	
 										/>
 									</Grid>
@@ -462,6 +469,8 @@ class App extends Component {
 											text="200р/шт"
 											onInputChange={this.onValueChange}
 											value={this.state.tvPackages}
+											maxValue={555777}
+											someEvent={this.callTo}
 										/>
 									</Grid>
 									<Grid

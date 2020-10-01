@@ -239,7 +239,7 @@ class Header extends Component {
 		<div className={classes.header}>
 			<Container>
 			<Grid container spacing={0}>
-				<Grid container justify="flex-start" item xs={9} sm={10}>
+				<Grid container justify="flex-start" item xs={8} sm={9}>
 				<a href="https://calculator.eugentimofeev.ru/" 
 					className={classes.headerLogo}
 					>
@@ -253,7 +253,7 @@ class Header extends Component {
 				</a>
 	
 				</Grid>
-				<Grid container justify="flex-end" item xs={3} sm={2}>
+				<Grid container justify="flex-end" item xs={4} sm={3}>
 				<div
 					className={
 					this.state.showAbout
@@ -263,7 +263,7 @@ class Header extends Component {
 					onClick={this.handleChange}
 				>
 					<span />
-					<span>О сайте</span>
+					<span>О странице</span>
 					<span />
 				</div>
 				<div
@@ -278,25 +278,25 @@ class Header extends Component {
 				>
 					<Zoom in={this.state.showAbout} timeout={500}>
 						<span>
-							Обновление от 31.08.20
+							Обновление от 1.10.20
 						</span>
 					</Zoom>
 					<Zoom in={this.state.showAbout} timeout={500}>
 						<span>
-							Сайт создан специально для сотрудников СЗК, дабы облегчить
+							Страница создана специально для сотрудников СЗК, дабы облегчить
 							расчет ЗП. Также благодаря данному калькулятору можно
 							ставить планы на месяц и улучшать свои показатели на работе.
 						</span>
 					</Zoom>
 					<Zoom in={this.state.showAbout} timeout={750}>
 						<span>
-							Сайт разработан с помощью библеотеки React с использованием
+							Страница разработана с помощью библеотеки React с использованием
 							React ui фреймворка Material-ui.
 						</span>
 					</Zoom>
 					<Zoom in={this.state.showAbout} timeout={1000}>
 						<span>
-							Если у Вас есть пожелания или идеи для сайта, то можно их
+							Если у Вас есть пожелания или идеи для страницы, то можно их
 							оставить по ссылкам ниже.
 						</span>
 					</Zoom>
