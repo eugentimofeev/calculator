@@ -49,7 +49,8 @@ const initialState = {
 	newbies: false,
 	night: false,
 
-	routers: "",
+	routersTwo: "",
+	routersFive: "",
 	consoles: "",
 	tvPackages: "",
 	video: "",
@@ -111,7 +112,8 @@ class App extends Component {
 
 	calcSales() {
 		let sales =
-			this.state.routers * 100 +
+			this.state.routersTwo * 100 +
+			this.state.routersFive * 200 +
 			this.state.consoles * 200 +
 			this.state.tvPackages * 200 +
 			this.state.video * 200 +
@@ -148,7 +150,7 @@ class App extends Component {
 
 		return (
 			<ThemeProvider theme={theme}>
-				<Header />
+				<Header title='Калькулятор ЗП для сотрудников СЗК' link='https://karelia.pro/work/'/>
 				<Container>
 					<Tabs
 						value={this.state.activeTab}
@@ -413,14 +415,14 @@ class App extends Component {
 										justify="center"
 										item
 										xs={12}
-										sm={6}
+										sm={4}
 									>
 										<Input
-											name="routers"
-											label="Роутеры"
+											name="routersTwo"
+											label="Роутеры 2.4 ГГц"
 											text="100р/шт"
 											onInputChange={this.onValueChange}
-											value={this.state.routers}
+											value={this.state.routersTwo}
 										/>
 									</Grid>
 									<Grid
@@ -429,7 +431,23 @@ class App extends Component {
 										justify="center"
 										item
 										xs={12}
-										sm={6}
+										sm={4}
+									>
+										<Input
+											name="routersFive"
+											label="Роутеры 2.4 ГГц + 5 ГГц"
+											text="200р/шт"
+											onInputChange={this.onValueChange}
+											value={this.state.routersFive}
+										/>
+									</Grid>
+									<Grid
+										className={classes.marginB}
+										container
+										justify="center"
+										item
+										xs={12}
+										sm={4}
 									>
 										<Input
 											name="warranties"
