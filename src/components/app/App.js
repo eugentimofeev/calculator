@@ -78,7 +78,7 @@ class App extends Component {
 	calcSalary() {
 		let rate;
 
-		this.state.night ? rate = 140 : rate = 123;
+		this.state.night ? rate = 162 : rate = 142;
 
 		let base = rate * (this.calcTrueHours() - this.calcAdditionalHours());
 
