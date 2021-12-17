@@ -84,7 +84,7 @@ class App extends Component {
 
 		base +=
 			+this.state.rating +
-			this.calcAdditionalHours() * 1.5 * rate +
+			this.calcAdditionalHours() * 2 * rate +
 			base * (this.state.assessment + +this.state.rank) +
 			base * ((this.state.base ? 0.1 : 0) + +this.state.rank) +
 			base * (this.state.newbies ? 0.05 : 0) +
